@@ -177,10 +177,10 @@ bindsym $mod+Ctrl+Shift+period exec --no-startup-id /home/neel/.i3/move_next
 bindsym $mod+Shift+x move container to output right; focus output right
 
 # Smart Gaps
-smart_gaps on
+# smart_gaps on
  
 # Smart Borders
-smart_borders on
+# smart_borders on
  
 # Set inner/outer gaps
 gaps inner 5
@@ -265,7 +265,9 @@ for_window [class="(?i)gpick"] floating enable
 for_window [class="(?i)kcolorchooser"] floating enable
 for_window [class="(?i)persepolis"] floating enable
 for_window [class="(?i)tlauncher"] floating enable
+for_window [class="(?i)zoom"] floating enable
 for_window [class="^.*"] border pixel 3
+for_window [class="matplotlib"] floating enable
 
 #######
 #THEME#
@@ -301,6 +303,7 @@ exec_always --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id copyq
 
 bindsym $mod+End exec --no-startup-id $HOME/bin/prochunter9x
+bindsym $mod+Shift+End exec --no-startup-id $HOME/bin/get_res
 
 assign [class="Pulseeffects"] 0
 exec --no-startup-id pulseeffects

@@ -78,6 +78,8 @@ plugins=(
     fzf
 )
 
+export ZSH_DISABLE_COMPFIX="true"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -130,7 +132,7 @@ alias vim=nvim
 # --- NNN CONFIGURATION ---
 
 # cd on quit for nnn
-n ()
+n()
 {
     # Block nesting of nnn in subshells
     if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
@@ -181,10 +183,6 @@ export NNN_BMS='a:/mnt/neel/Anime;A:/mnt/extras/Anime;n:/mnt/neel;e:/mnt/extras;
 # Default finder for fzf
 export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-bindkey '^j' backward-word
- 
-bindkey '^k' forward-word
 
 export PAGER=vimpager
 alias less=$PAGER
@@ -278,5 +276,11 @@ bindkey -M vicmd 'y' yank-hack
 bindkey -M visual S add-surround
 
 timetable() {
-    [[ $(date --date="$1") ]] && head -n 3 ~/time\ table && grep $(date --date="$1" +%a) ~/time\ table && tail -n 1 ~/time\ table
+    [[ $(date --date="$1") ]] && \
+        sed -n '1p' ~/"time table" && \
+        sed -n '2p' ~/"time table" | GREP_COLOR='0;32' grep '[0-9:T\.]' && \
+        sed -n '3p' ~/"time table" && \
+        grep "$(date --date="$1" +%a)" ~/"time table" | GREP_COLOR='0;34' grep -E '[^|]' && \
+        tail -n 1 ~/"time table"
 }
+

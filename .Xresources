@@ -1,6 +1,6 @@
 xterm.vt100.saveLines: 1000
 xterm.termName: xterm-256color
-xterm*faceName: SourceCodeProMedium:size=18
+xterm*faceName: CodeNewRoman Nerd Font Mono:size=18
 xterm*boldFont: fixed
 xterm*allowBoldFonts: false
 ! xterm*font: fixed

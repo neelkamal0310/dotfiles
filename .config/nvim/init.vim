@@ -285,8 +285,6 @@ autocmd FileType c map <buffer> <F5> :w<CR>:!clear;gcc % -Wall -o %<.out<CR>
 autocmd FileType c imap <buffer> <F5> <Esc>:w<CR>:!clear;gcc -Wall % -o %<.out<CR>
 autocmd FileType c map <buffer> <F6> :!clear;./%<.out<CR>
 autocmd FileType c imap <buffer> <F6> <Esc>:!clear;./%<.out<CR>
-autocmd FileType c inoremap <buffer> { {<Enter>}<Esc>O
-autocmd FileType c inoremap <buffer> { {<Enter>}<Esc>O
 
 autocmd FileType html inoremap <buffer> {% {%%}<Esc>i<Esc>i<Space><Space><Esc>i
 autocmd FileType html inoremap <buffer> {{ {{}}<Esc>i<Esc>i<Space><Space><Esc>i
