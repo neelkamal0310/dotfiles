@@ -284,3 +284,4 @@ timetable() {
         tail -n 1 ~/"time table"
 }
 
+yadm status --short
