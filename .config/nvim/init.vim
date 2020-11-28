@@ -260,10 +260,14 @@ set fo-=t
 " nnoremap <C-[> :tabp<CR>
 " nnoremap <C-]> :tabn<CR>
 
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
+nnoremap <C-h> :wincmd h<CR>
+inoremap <C-h> <Esc>:wincmd h<CR>i
+nnoremap <C-j> :wincmd j<CR>
+inoremap <C-j> <Esc>:wincmd j<CR>i
+nnoremap <C-k> :wincmd k<CR>
+inoremap <C-k> <Esc>:wincmd k<CR>i
+nnoremap <C-l> :wincmd l<CR>
+inoremap <C-l> <Esc>:wincmd l<CR>i
 nnoremap <leader>x :NERDTreeToggle<CR>
 nnoremap <leader>= :vertical resize +10<CR>
 nnoremap <leader>- :vertical resize -10<CR>
@@ -278,19 +282,9 @@ nmap <leader>/ :noh<CR>
 nnoremap <leader>i :!$TERM &<CR><CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-autocmd FileType python map <buffer> <F5> :w<CR>:!clear;python %<CR>
-autocmd FileType python imap <buffer> <F5> <Esc>:w<CR>:!clear;python %<CR>
-
-autocmd FileType c map <buffer> <F5> :w<CR>:!clear;gcc % -Wall -o %<.out<CR>
-autocmd FileType c imap <buffer> <F5> <Esc>:w<CR>:!clear;gcc -Wall % -o %<.out<CR>
-autocmd FileType c map <buffer> <F6> :!clear;./%<.out<CR>
-autocmd FileType c imap <buffer> <F6> <Esc>:!clear;./%<.out<CR>
-
 autocmd FileType html inoremap <buffer> {% {%%}<Esc>i<Esc>i<Space><Space><Esc>i
 autocmd FileType html inoremap <buffer> {{ {{}}<Esc>i<Esc>i<Space><Space><Esc>i
 
 autocmd FileType htmldjango inoremap <buffer> {% {%%}<Esc>i<Esc>i<Space><Space><Esc>i
 autocmd FileType htmldjango inoremap <buffer> {{ {{}}<Esc>i<Esc>i<Space><Space><Esc>i
 autocmd FileType htmldjango inoremap <buffer> <leader>r :setf html<CR>:setf htmldjango<CR>
-
-autocmd FileType css inoremap <buffer> { {<Enter>}<Esc>O

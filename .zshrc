@@ -10,7 +10,7 @@ export ZSH="/home/neel/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="clean"
+ZSH_THEME="clean2"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -284,4 +284,7 @@ timetable() {
         tail -n 1 ~/"time table"
 }
 
-yadm status --short
+# yadm status --short
+
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
