@@ -212,8 +212,8 @@ MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 
 # set vim mode prompt
-MODE_INDICATOR_VIINS='%F{15}<%F{15}INSERT<%f'
-MODE_INDICATOR_VICMD='%F{10}<%F{2}NORMAL<%f'
+MODE_INDICATOR_VIINS=''
+MODE_INDICATOR_VICMD=''
 MODE_INDICATOR_REPLACE='%F{9}<%F{1}REPLACE<%f'
 MODE_INDICATOR_SEARCH='%F{13}<%F{5}SEARCH<%f'
 MODE_INDICATOR_VISUAL='%F{12}<%F{4}VISUAL<%f'
@@ -288,3 +288,4 @@ timetable() {
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+alias top='bpytop'
