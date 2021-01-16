@@ -92,7 +92,7 @@ scrolling:
 # Font configuration
 font:
 
-  size: 15
+  size: 14
 
   # Normal (roman) font face
   normal:
@@ -103,10 +103,11 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     #family: SauceCodePro Nerd Font Mono
-    family: IBM Plex Mono
+    #family: IBM Plex Mono
+    family: Recursive
 
     # The `style` can be specified to pick a specific face.
-    style: Text
+    style: Mono Casual
 
   # Bold font face
   bold:
@@ -115,10 +116,10 @@ font:
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: SauceCodePro Nerd Font Mono
-    family: IBM Plex Mono
+    family: Recursive
 
     # The `style` can be specified to pick a specific face.
-    style: Medium
+    style: Mono Casual Medium
 
   # Italic font face
   italic:
@@ -127,10 +128,10 @@ font:
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: SauceCodePro Nerd Font Mono
-    family: IBM Plex Mono
+    family: Recursive
 
     # The `style` can be specified to pick a specific face.
-    style: Italic
+    style: Mono Casual Italic
 
   # Bold italic font face
   bold_italic:
@@ -139,10 +140,10 @@ font:
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: SauceCodePro Nerd Font Mono
-    family: IBM Plex Mono
+    family: Recursive
 
     # The `style` can be specified to pick a specific face.
-    style: Medium Italic
+    style: Mono Casual Medium Italic
 
   # Point size
   # size: 11.0
@@ -151,7 +152,7 @@ font:
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 0
-    y: -4
+    y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -509,7 +510,7 @@ cursor:
   # the style of the active value of the normal cursor.
   #
   # See `cursor.style` for available options.
-  #vi_mode_style: None
+  vi_mode_style: Block
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.

@@ -2,7 +2,7 @@ highlight normal guibg=#111111
 
 set linespace=4
 
-let s:fontsize = 12
+let s:fontsize = 17
 function! AdjustFontSize(amount)
   let s:fontsize = s:fontsize+a:amount
   :execute "GuiFont! Source Code Pro Medium:h" . s:fontsize

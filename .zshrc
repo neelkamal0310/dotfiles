@@ -75,7 +75,6 @@ plugins=(
 	archlinux
 	history-substring-search
     zsh-interactive-cd
-    fzf
 )
 
 export ZSH_DISABLE_COMPFIX="true"
@@ -108,9 +107,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias sp='sudo pacman'
-alias p='pacman'
-
 if systemctl -q is-active graphical.target && [[ ! $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   [ -z $TMUX ] && exec startx
 fi
@@ -126,8 +122,6 @@ export LESS="--mouse --wheel-lines=1"
 
 # Set default editor
 export EDITOR=nvim
-
-alias vim=nvim
 
 # --- NNN CONFIGURATION ---
 
@@ -152,7 +146,7 @@ n()
     # stty lwrap undef
     # stty lnext undef
 
-    nnn -a "$@"
+    nnn -a -w -g "$@"
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
@@ -185,18 +179,11 @@ export FZF_DEFAULT_COMMAND="fd"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export PAGER=vimpager
-alias less=$PAGER
-alias zless=$PAGER
-alias yt-dl=youtube-dl
-alias ka=killall
-alias viminit="vim ~/.config/nvim/init.vim"
-
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 
 [ -n "$NNNLVL" ] && PS1="N$NNNLVL $PS1"
-alias N='sudo -E nnn -H'
 
 # Enable zsh vim mode
 source "$HOME/git/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
@@ -204,17 +191,17 @@ source "$HOME/git/zsh-vim-mode/zsh-vim-mode.plugin.zsh"
 export KEYTIMEOUT=1
 
 # set zsh vim mode cursor colors
-MODE_CURSOR_VIINS="#00ff00 blinking bar"
+MODE_CURSOR_VIINS="#00ff00"
 MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
-MODE_CURSOR_VICMD="green block"
-MODE_CURSOR_SEARCH="#ff00ff steady underline"
-MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
-MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
+MODE_CURSOR_VICMD="#ffffff"
+MODE_CURSOR_SEARCH="#ff00ff"
+MODE_CURSOR_VISUAL="#ff00ff"
+MODE_CURSOR_VLINE="#00ffff"
 
 # set vim mode prompt
 MODE_INDICATOR_VIINS=''
 MODE_INDICATOR_VICMD=''
-MODE_INDICATOR_REPLACE='%F{9}<%F{1}REPLACE<%f'
+MODE_INDICATOR_REPLACE=''
 MODE_INDICATOR_SEARCH='%F{13}<%F{5}SEARCH<%f'
 MODE_INDICATOR_VISUAL='%F{12}<%F{4}VISUAL<%f'
 MODE_INDICATOR_VLINE='%F{12}<%F{4}V-LINE<%f'
@@ -275,17 +262,23 @@ bindkey -M vicmd 'd' delete-hack
 bindkey -M vicmd 'y' yank-hack
 bindkey -M visual S add-surround
 
-timetable() {
-    [[ $(date --date="$1") ]] && \
-        sed -n '1p' ~/"time table" && \
-        sed -n '2p' ~/"time table" | GREP_COLOR='0;32' grep '[0-9:T\.]' && \
-        sed -n '3p' ~/"time table" && \
-        grep "$(date --date="$1" +%a)" ~/"time table" | GREP_COLOR='0;34' grep -E '[^|]' && \
-        tail -n 1 ~/"time table"
-}
-
-# yadm status --short
-
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
-alias top='bpytop'
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+mcd() {
+    [[ $1 ]] && mkdir "$@" && cd "$@"
+}
+
+alias less=$PAGER
+alias yt-dl="youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --merge-output-format mp4"
+alias ka=killall
+alias viminit="vim ~/.config/nvim/init.vim"
+alias ls='exa --group-directories-first'
+alias dm='yadm'
+alias v4l2webcam='sudo modprobe v4l2loopback devices=1 video_nr=69 card_label="MattressX" exclusive_caps=1'
+alias :q='exit'
+alias N='sudo -E nnn -H'
+alias vim=nvim
+alias sp='sudo pacman'
+alias p='pacman'

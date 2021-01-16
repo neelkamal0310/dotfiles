@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'morhetz/gruvbox'
 Plug 'arcticicestudio/nord-vim'
@@ -24,6 +25,8 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let mapleader = " "
+
+let g:pymode_indent = 0
 
 " |--------------|
 " | Vim-fugitive |
@@ -80,13 +83,6 @@ inoreabbrev <expr> __
 " | Coc |
 " |-----|
 
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-set noswapfile
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -125,16 +121,16 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 " GoTo code navigation.
 nmap <silent> gr <Plug>(coc-references)
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -142,18 +138,6 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-" Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
-"nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-"nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-"inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-"inoremap <nowait><expr> <C-b> coc#float#has_scoll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " |-----------|
 " | lightline |
@@ -185,6 +169,9 @@ let g:user_emmet_leader_key=','
 " |--------|
 " | Normal |
 " |--------|
+
+" TextEdit might fail if hidden is not set.
+set hidden
 
 " let g:palenight_terminal_italics=1
 set termguicolors
@@ -220,6 +207,10 @@ set number relativenumber
 set ignorecase
 set smartcase
 
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+set noswapfile
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
@@ -229,6 +220,11 @@ set clipboard=unnamedplus
 set colorcolumn=79
 set tw=79
 set fo-=t
+set guicursor=i-ci:block-icursor,r-cr:block-rcursor
+
+set nohlsearch
+set hidden
+set scrolloff=8
 
 " nnoremap <C-[> :tabp<CR>
 " nnoremap <C-]> :tabn<CR>
@@ -255,9 +251,22 @@ nmap <leader>/ :noh<CR>
 nnoremap <leader>i :!$TERM &<CR><CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-autocmd FileType html inoremap <buffer> {% {%%}<Esc>i<Esc>i<Space><Space><Esc>i
-autocmd FileType html inoremap <buffer> {{ {{}}<Esc>i<Esc>i<Space><Space><Esc>i
+autocmd FileType html inoremap <buffer> {% {%%}<Left><Left><Space><Space><Left>
+autocmd FileType html inoremap <buffer> {{ {{}}<Left><Left><Space><Space><Left>
 
-autocmd FileType htmldjango inoremap <buffer> {% {%%}<Esc>i<Esc>i<Space><Space><Esc>i
-autocmd FileType htmldjango inoremap <buffer> {{ {{}}<Esc>i<Esc>i<Space><Space><Esc>i
+autocmd FileType htmldjango inoremap <buffer> {% {%%}<Left><Left><Space><Space><Left>
+autocmd FileType htmldjango inoremap <buffer> {{ {{}}<Left><Left><Space><Space><Left>
 autocmd FileType htmldjango inoremap <buffer> <leader>r :setf html<CR>:setf htmldjango<CR>
+
+autocmd FileType python inoremap <buffer> ,,c class **(object):<Enter><Enter>
+            \def __init__(self, **):<Enter>**<Esc>3<Up>0f*c2<Right>
+autocmd FileType python inoremap <buffer> ,,f def **(**):<Enter>**
+
+autocmd filetype rust inoremap <buffer> ,,f fn **(**) {<Enter>**<Enter>}
+autocmd filetype rust inoremap <buffer> ,,p println!("**");<Esc>F*ci"
+
+inoremap <C-c> <Esc>/\*\*<CR>:noh<CR>c2<Right>
+
+hi icursor guibg=#00ff00 guifg=#000000
+hi rcursor guibg=#ff0000 guifg=#000000
+hi normal guibg=None
