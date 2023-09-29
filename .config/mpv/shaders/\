@@ -1,0 +1,47 @@
+vo=gpu
+profile=gpu-hq
+#hwdec=vaapi
+vd-lavc-dr=no
+geometry=x75%
+#cache=no
+demuxer-max-bytes=100M
+glsl-shaders="~/.config/mpv/shaders/Anime4K_Thin_HQ.glsl:~/.config/mpv/shaders/Anime4K_Deblur_DoG.glsl:~/.config/mpv/shaders/Anime4K_Denoise_Bilateral_Mean.glsl"
+demuxer-max-back-bytes=50M
+demuxer-thread=yes
+cache-pause=no
+contrast=0
+brightness=0
+saturation=50
+gamma=-2
+fs=no
+sub-auto=all
+#osc=no
+alang=jpn
+slang=eng
+
+#subtitle settings
+sub-font="Montserrat Semibold"
+sub-font-size=50
+sub-border-size=2
+sub-margin-x=0
+sub-margin-y=0
+sub-pos=100
+sub-spacing=3
+sub-ass-override=yes
+# sub-color="#ff4444"
+sub-border-color="#111111"
+sub-shadow-color="#000000"
+sub-shadow-offset=2
+
+#osd
+osd-font="Source Sans Pro"
+osd-font-size=50
+
+#save-position-on-quit
+[extension.webm]
+loop-file=inf
+[extension.gif]
+loop-file=inf
+[extension.mp3]
+fs=no
+#save-position-on-quit=no
